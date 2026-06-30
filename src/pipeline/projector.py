@@ -67,7 +67,24 @@ def _resolve_path(data: Any, path: str) -> Any:
         arr = _resolve_path(data, m_spread.group(1))
         sub = m_spread.group(2)
         if isinstance(arr, list):
-            return [_resolve_path(item, sub) for item in arr if item is not None]
+            results = []
+            for item in arr:
+                if item is None:
+                    continue
+                if isinstance(item, (str, int, float, bool)):
+                    # Item is a plain scalar (e.g. our canonical `skills`
+                    # field is List[str], not List[{name, ...}]).
+                    # A sub-path like ".name" on a scalar list has nothing
+                    # to traverse into — return the scalar itself rather
+                    # than silently producing None. This keeps configs
+                    # written against an object-shaped array (e.g. the
+                    # assignment brief's own example "skills[].name")
+                    # working correctly against our simplified schema,
+                    # instead of quietly resolving to a list of nulls.
+                    results.append(item)
+                else:
+                    results.append(_resolve_path(item, sub))
+            return results
         return None
 
     # Bare spread, no sub-path: "skills[]" → return the list itself
@@ -105,6 +122,20 @@ def _resolve_path(data: Any, path: str) -> Any:
 # ── Normalization overrides ───────────────────────────────────────────────────
 
 def _apply_normalize(value: Any, normalize: Optional[str]) -> Any:
+    """
+    Re-apply a normalization at projection time.
+
+    Note: by the time a value reaches the projector, it has already been
+    normalized once during extraction (where country-hinted E.164 parsing,
+    etc. has full context — location, source, etc.). This function exists
+    to (a) re-validate that re-mapped/renamed values still satisfy the
+    target normalization, and (b) cover configs that request a different
+    normalization than what extraction applied. It does NOT have access to
+    a country hint, so E164 calls here default to the same logic as a
+    bare phone string with no location context. In practice this is a
+    no-op pass-through for canonical phones, since they already carry a
+    '+' prefix and normalize_phone() short-circuits on that.
+    """
     if not normalize or value is None:
         return value
 

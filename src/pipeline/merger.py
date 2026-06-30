@@ -15,7 +15,7 @@ Source Priority (descending):
 
 Conflict Resolution:
   - Scalars  : highest-priority non-null wins.
-                Equal priority → first deterministic occurrence (insertion order).
+                Equal priority → most recently seen (insertion order).
   - Arrays   : full union with deduplication (order: high-priority first).
   - Structs  : key-merge — missing sub-fields filled from lower-priority source.
 
@@ -59,8 +59,19 @@ def _norm_text(s: str) -> str:
 
 def _identity_keys(rec: IntermediateRecord) -> List[str]:
     """
-    Returns a list of candidate identity keys for this record (in priority order).
-    The first key that matches an existing bucket is used.
+    Returns a list of candidate identity keys for this record, in strict
+    priority order: email > phone > name+company > name+phone.
+
+    CRITICAL: the weaker fallback keys (③ name+company, ④ name+phone) are
+    only emitted when the record has NO email and NO phone at all. If a
+    record already carries a strong identity signal (email or phone), the
+    weak keys are deliberately omitted — registering them anyway would let
+    two genuinely different people who happen to share a name+company (a
+    common real-world collision, e.g. two different "Arjun Joshi"s at the
+    same firm) get silently merged into one candidate purely because of a
+    coincidental name match, even though both have perfectly good, unique
+    emails. This is exactly the "wrong-but-confident" failure mode the
+    assignment brief warns against, and it compounds badly at scale.
     """
     keys: List[str] = []
 
@@ -72,18 +83,20 @@ def _identity_keys(rec: IntermediateRecord) -> List[str]:
     for phone in rec.phones:
         keys.append(f"phone:{phone}")
 
-    # ③ name + company (from first experience entry)
-    if rec.full_name:
+    # Only fall back to the weak name+company key when there is NO strong
+    # identity signal (no email, no phone) on this record at all. Note:
+    # a standalone "name+phone" fallback key is unnecessary here — if a
+    # record has a phone number, key ② (phone alone) already uniquely
+    # identifies it; there's nothing extra a name+phone combination key
+    # would add once phone-bearing records are excluded from this branch.
+    if not rec.emails and not rec.phones and rec.full_name:
         name_norm = _norm_text(rec.full_name)
         company_norm = ""
         if rec.experience:
             company_norm = _norm_text(rec.experience[0].company or "")
+
         if company_norm:
             keys.append(f"name_company:{name_norm}|{company_norm}")
-
-        # ④ name + phone (last resort)
-        for phone in rec.phones:
-            keys.append(f"name_phone:{name_norm}|{phone}")
 
     return keys
 

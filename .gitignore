@@ -1,0 +1,36 @@
+# Virtual Environment
+.venv/
+venv/
+
+inputs/make_sample_docx.py
+inputs/make_sample_resume.py
+
+designdoc.py
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+
+# Logs
+*.log
+
+# Generated output
+output/
+*.json.bak
+
+# OS
+.DS_Store
+Thumbs.db
