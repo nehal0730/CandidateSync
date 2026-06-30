@@ -17,6 +17,7 @@ import json
 import logging
 import os
 import sys
+import time
 from typing import List
 
 sys.path.insert(0, os.path.dirname(__file__))
@@ -109,6 +110,8 @@ def main() -> int:
     else:
         print("→ No config provided — emitting full default canonical schema.")
 
+    start_time = time.perf_counter()
+
     # ── Run pipeline ──────────────────────────────────────────────────────────
     try:
         results = run_pipeline(
@@ -123,6 +126,8 @@ def main() -> int:
 
     print(f"→ Produced {len(results)} candidate profile(s).")
 
+    elapsed_time = time.perf_counter() - start_time
+
     # ── Write output ──────────────────────────────────────────────────────────
     output_dir = os.path.dirname(args.output)
     if output_dir:
@@ -135,7 +140,48 @@ def main() -> int:
             json.dump(results, f, ensure_ascii=False)
 
     print(f"✓ Output written to: {args.output}")
+
+    # ── Pipeline Summary ────────────────────────────────────────────────
+
+    avg_confidence = (
+        sum(r.get("overall_confidence", 0) for r in results) / len(results)
+        if results else 0
+    )
+
+    avg_completeness = None
+
+    if results:
+        values = [
+            r.get("metadata", {})
+            .get("quality", {})
+            .get("completeness_percent")
+            for r in results
+        ]
+
+        values = [v for v in values if v is not None]
+
+        if values:
+            avg_completeness = sum(values) / len(values)
+
+    print("\n" + "=" * 60)
+    print("               CandidateSync Pipeline Summary")
+    print("=" * 60)
+
+    print(f"Pipeline Status            : SUCCESS")
+    print(f"Input Files Processed      : {len(input_paths)}")
+    print(f"Canonical Candidates       : {len(results)}")
+
+    print(f"Average Confidence         : {avg_confidence * 100:.1f}%")
+    if avg_completeness is not None:
+        print(f"Average Completeness       : {avg_completeness:.1f}%")
+    else:
+        print("Average Completeness       : N/A (metadata excluded by projection)")
+
+    print(f"Execution Time             : {elapsed_time:.3f} seconds")
+
+    print("=" * 60)
     return 0
+
 
 
 if __name__ == "__main__":

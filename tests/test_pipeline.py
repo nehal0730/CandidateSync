@@ -203,7 +203,8 @@ class TestConfidenceScoring(unittest.TestCase):
         pairs = merge_records([r1])
         canon, contributing = pairs[0]
         compute_confidence(canon, contributing)
-        self.assertEqual(canon.confidence["headline"], 0.0)
+        self.assertEqual(canon.confidence["headline"]["score"], 0.0)
+        self.assertEqual(canon.confidence["headline"]["reason"], "No source provided this field.")
 
     def test_confidence_scoped_per_candidate_not_global(self):
         """
