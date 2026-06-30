@@ -1,0 +1,26 @@
+Recruiter call notes — 2024-05-12
+
+Name: Priya Sharma
+Email: priya.sharma@gmail.com
+Phone: 9876543210
+Location: Bangalore, India
+
+Spoke with Priya for 30 mins. She's currently a Senior Software Engineer at
+TechCorp and seems happy there but open to the right opportunity. Strong
+background in Python and distributed systems. Mentioned she's been doing a
+lot of work with Kubernetes and Docker lately, and has some exposure to Go.
+Comfortable with AWS. She has about 6 years of experience total.
+
+Headline: Senior Software Engineer open to new opportunities
+
+Skills: python, kubernetes, docker, aws, go, postgresql
+
+Seemed very articulate and confident. Would recommend moving forward.
+
+---
+
+Notes on another candidate:
+Name: Ananya Iyer
+Phone: 7654321098
+She works in DevOps, has strong Terraform and CI/CD skills. About 5 years
+experience. Based in Hyderabad.

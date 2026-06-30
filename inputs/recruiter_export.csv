@@ -1,0 +1,5 @@
+name,email,phone,current_company,title,location,linkedin,skills,headline,years_exp
+Priya Sharma,priya.sharma@gmail.com,9876543210,TechCorp India,Senior Software Engineer,"Bangalore, India",linkedin.com/in/priyasharma,"Python, React, AWS, Docker, K8s",Full-stack engineer building scalable systems,6
+Rahul Verma,rahul.verma@yahoo.com,8765432109,DataSystems Inc,Data Scientist,"Pune, India",linkedin.com/in/rahulverma,"Python, ML, TensorFlow, SQL",ML engineer focused on production systems,4
+,bad-email-no-name,123,,,,,,,
+Ananya Iyer,ananya.iyer@outlook.com,7654321098,CloudNine Technologies,DevOps Engineer,"Hyderabad, India",linkedin.com/in/ananyaiyer,"AWS, Terraform, Kubernetes, CI/CD",Infrastructure automation specialist,5
