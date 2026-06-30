@@ -162,7 +162,6 @@ def run_pipeline(
     # merge_records returns (CanonicalRecord, contributing_records) pairs so that
     # confidence scoring below is correctly scoped to each candidate's own sources.
     merged_pairs = merge_records(all_intermediate)
-    log.info("Merged into %d unique candidate(s).", len(merged_pairs))
 
     # ── ④ Confidence ──────────────────────────────────────────────────────────
     canonical_records: List[CanonicalRecord] = []
