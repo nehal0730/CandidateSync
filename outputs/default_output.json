@@ -107,8 +107,11 @@
         "method": "direct_field"
       },
       "skills": {
-        "source": "ats_json",
-        "method": "direct_field"
+        "sources": [
+          "ats_json",
+          "resume_pdf"
+        ],
+        "method": "merged"
       },
       "experience": {
         "sources": [
@@ -122,12 +125,18 @@
     "metadata": {
       "processed_at": "2026-06-30",
       "merged_from": [
+        "recruiter_notes",
         "ats_json",
         "recruiter_csv",
-        "recruiter_notes",
         "resume_pdf"
       ],
-      "version": "1.0.0"
+      "version": "1.0.0",
+      "quality": {
+        "filled_fields": 10,
+        "total_fields": 10,
+        "completeness": 1.0,
+        "completeness_percent": 100.0
+      }
     }
   },
   {
@@ -226,7 +235,13 @@
       "merged_from": [
         "recruiter_csv"
       ],
-      "version": "1.0.0"
+      "version": "1.0.0",
+      "quality": {
+        "filled_fields": 9,
+        "total_fields": 10,
+        "completeness": 0.9,
+        "completeness_percent": 90.0
+      }
     }
   },
   {
@@ -323,10 +338,16 @@
     "metadata": {
       "processed_at": "2026-06-30",
       "merged_from": [
-        "recruiter_csv",
-        "recruiter_notes"
+        "recruiter_notes",
+        "recruiter_csv"
       ],
-      "version": "1.0.0"
+      "version": "1.0.0",
+      "quality": {
+        "filled_fields": 9,
+        "total_fields": 10,
+        "completeness": 0.9,
+        "completeness_percent": 90.0
+      }
     }
   },
   {
@@ -443,7 +464,13 @@
         "ats_json",
         "resume_pdf"
       ],
-      "version": "1.0.0"
+      "version": "1.0.0",
+      "quality": {
+        "filled_fields": 10,
+        "total_fields": 10,
+        "completeness": 1.0,
+        "completeness_percent": 100.0
+      }
     }
   }
 ]

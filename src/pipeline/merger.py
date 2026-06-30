@@ -386,6 +386,52 @@ def _derive_years_experience(experience: List[ExperienceEntry]) -> Optional[floa
         return None
 
 
+def _calculate_completeness(canon: CanonicalRecord) -> dict:
+    """
+    Compute profile completeness.
+
+    Completeness = filled canonical fields / total canonical fields.
+    """
+
+    fields = {
+        "full_name": canon.full_name,
+        "emails": canon.emails,
+        "phones": canon.phones,
+        "headline": canon.headline,
+        "location": canon.location,
+        "skills": canon.skills,
+        "experience": canon.experience,
+        "education": canon.education,
+        "links": canon.links,
+        "years_experience": canon.years_experience,
+    }
+
+    filled = 0
+
+    for value in fields.values():
+        if value is None:
+            continue
+
+        if isinstance(value, str):
+            if value.strip():
+                filled += 1
+
+        elif isinstance(value, (list, dict)):
+            if len(value) > 0:
+                filled += 1
+
+        else:
+            filled += 1
+
+    total = len(fields)
+
+    return {
+        "filled_fields": filled,
+        "total_fields": total,
+        "completeness": round(filled / total, 2),
+        "completeness_percent": round((filled / total) * 100, 1),
+    }
+
 def _merge_candidate_records(
     all_recs: List[IntermediateRecord],
     bucket_key: Optional[str] = None,
@@ -490,6 +536,7 @@ def _merge_candidate_records(
         "merged_from":  list({r.source_name for r in all_recs
                                if not r.extraction_error}),
         "version":      "1.0.0",
+        "quality":      _calculate_completeness(canon),
     }
 
     return canon

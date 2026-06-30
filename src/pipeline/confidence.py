@@ -31,6 +31,9 @@ from models import CanonicalRecord, IntermediateRecord
 
 
 # ── Source reliability weights ────────────────────────────────────────────────
+# Relative reliability of each source.
+# These are configurable heuristics chosen for this prototype and can be
+# adjusted in production based on observed data quality.
 _SOURCE_WEIGHT: Dict[str, float] = {
     "ats_json":        0.90,
     "recruiter_csv":   0.75,
