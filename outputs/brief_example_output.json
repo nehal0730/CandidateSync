@@ -1,0 +1,313 @@
+[
+  {
+    "candidate_id": "cand_d1b335152948a5cd",
+    "full_name": "Priya Sharma",
+    "primary_email": "priya.sharma@gmail.com",
+    "phone": "+919876543210",
+    "skills": [
+      "python",
+      "react",
+      "aws",
+      "docker",
+      "kubernetes",
+      "go",
+      "postgresql",
+      "rest",
+      "ci/cd",
+      "terraform"
+    ],
+    "confidence": {
+      "full_name": 0.9,
+      "emails": 0.9,
+      "phones": 0.9,
+      "location": 0.72,
+      "links": 0.72,
+      "headline": 0.72,
+      "years_experience": 0.9,
+      "skills": 0.9,
+      "experience": 0.75,
+      "education": 0.9
+    },
+    "overall_confidence": 0.844,
+    "provenance": {
+      "full_name": {
+        "source": "recruiter_csv",
+        "method": "most_complete_name"
+      },
+      "location": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "emails": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "phones": {
+        "source": "ats_json",
+        "method": "regex_parse"
+      },
+      "links": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "headline": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "years_experience": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "education": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "skills": {
+        "sources": [
+          "ats_json",
+          "resume_pdf"
+        ],
+        "method": "merged"
+      },
+      "experience": {
+        "sources": [
+          "recruiter_csv",
+          "resume_pdf"
+        ],
+        "method": "merged"
+      }
+    },
+    "metadata": {
+      "processed_at": "2026-06-30",
+      "merged_from": [
+        "recruiter_csv",
+        "resume_pdf",
+        "recruiter_notes",
+        "ats_json"
+      ],
+      "version": "1.0.0"
+    }
+  },
+  {
+    "candidate_id": "cand_ac0bbd540dfc8196",
+    "full_name": "Rahul Verma",
+    "primary_email": "rahul.verma@yahoo.com",
+    "phone": "+918765432109",
+    "skills": [
+      "python",
+      "machine learning",
+      "tensorflow",
+      "sql"
+    ],
+    "confidence": {
+      "full_name": 0.6,
+      "emails": 0.6,
+      "phones": 0.6,
+      "location": 0.6,
+      "links": 0.6,
+      "headline": 0.6,
+      "years_experience": 0.6,
+      "skills": 0.6,
+      "experience": 0.6,
+      "education": 0.0
+    },
+    "overall_confidence": 0.6,
+    "provenance": {
+      "full_name": {
+        "source": "recruiter_csv",
+        "method": "most_complete_name"
+      },
+      "emails": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "location": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "phones": {
+        "source": "recruiter_csv",
+        "method": "regex_parse"
+      },
+      "links": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "headline": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "years_experience": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "experience": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "skills": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      }
+    },
+    "metadata": {
+      "processed_at": "2026-06-30",
+      "merged_from": [
+        "recruiter_csv"
+      ],
+      "version": "1.0.0"
+    }
+  },
+  {
+    "candidate_id": "cand_fb83c5993d100065",
+    "full_name": "Ananya Iyer",
+    "primary_email": "ananya.iyer@outlook.com",
+    "phone": "+917654321098",
+    "skills": [
+      "aws",
+      "terraform",
+      "kubernetes",
+      "ci/cd"
+    ],
+    "confidence": {
+      "full_name": 0.75,
+      "emails": 0.6,
+      "phones": 0.75,
+      "location": 0.6,
+      "links": 0.6,
+      "headline": 0.6,
+      "years_experience": 0.75,
+      "skills": 0.75,
+      "experience": 0.6,
+      "education": 0.0
+    },
+    "overall_confidence": 0.673,
+    "provenance": {
+      "full_name": {
+        "source": "recruiter_csv",
+        "method": "most_complete_name"
+      },
+      "emails": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "location": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "phones": {
+        "source": "recruiter_csv",
+        "method": "regex_parse"
+      },
+      "links": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "headline": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "years_experience": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "experience": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "skills": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      }
+    },
+    "metadata": {
+      "processed_at": "2026-06-30",
+      "merged_from": [
+        "recruiter_csv",
+        "recruiter_notes"
+      ],
+      "version": "1.0.0"
+    }
+  },
+  {
+    "candidate_id": "cand_5c321b8e5d528f08",
+    "full_name": "Vikram Singh",
+    "primary_email": "vikram.singh@protonmail.com",
+    "phone": "+919988776655",
+    "skills": [
+      "java",
+      "spring boot",
+      "kafka",
+      "mysql",
+      "redis",
+      "docker",
+      "aws"
+    ],
+    "confidence": {
+      "full_name": 0.9,
+      "emails": 0.9,
+      "phones": 0.9,
+      "location": 0.72,
+      "links": 0.72,
+      "headline": 0.72,
+      "years_experience": 0.9,
+      "skills": 0.9,
+      "experience": 0.9,
+      "education": 0.9
+    },
+    "overall_confidence": 0.862,
+    "provenance": {
+      "full_name": {
+        "source": "ats_json",
+        "method": "most_complete_name"
+      },
+      "location": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "emails": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "phones": {
+        "source": "ats_json",
+        "method": "regex_parse"
+      },
+      "links": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "headline": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "years_experience": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "experience": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "education": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "skills": {
+        "sources": [
+          "ats_json",
+          "resume_pdf"
+        ],
+        "method": "merged"
+      }
+    },
+    "metadata": {
+      "processed_at": "2026-06-30",
+      "merged_from": [
+        "resume_pdf",
+        "ats_json"
+      ],
+      "version": "1.0.0"
+    }
+  }
+]

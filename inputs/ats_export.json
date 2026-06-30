@@ -1,6 +1,6 @@
 [
   {
-    "name": "Priya Sharma",
+    "name": "Priya",
     "email_addresses": [
       {"value": "priya.sharma@gmail.com", "type": "personal"}
     ],
@@ -14,22 +14,6 @@
     "github_url": "github.com/priyasharma-dev",
     "headline": "Senior Software Engineer @ TechCorp",
     "years_of_experience": 6,
-    "employment_history": [
-      {
-        "employer": "TechCorp India",
-        "title": "Senior Software Engineer",
-        "start_date": "2021-03",
-        "end_date": "present",
-        "description": "Leading backend platform team, building microservices in Python and Go."
-      },
-      {
-        "employer": "StartupXYZ",
-        "title": "Software Engineer",
-        "start_date": "2019-06",
-        "end_date": "2021-02",
-        "description": "Built REST APIs and CI/CD pipelines."
-      }
-    ],
     "education": [
       {
         "school_name": "Indian Institute of Technology, Delhi",

@@ -174,6 +174,17 @@ def run_pipeline(
     outputs: List[Dict[str, Any]] = []
 
     for canon in canonical_records:
+        if (
+        not canon.full_name
+        and not canon.emails
+        and not canon.phones
+        ):
+            log.info(
+                "Skipping empty candidate %s (no identity information).",
+                canon.candidate_id,
+            )
+            continue
+
         try:
             projected = project(canon, config)
         except ProjectionError as exc:
@@ -189,6 +200,9 @@ def run_pipeline(
                 "Validation warnings for candidate %s: %s",
                 canon.candidate_id, errors
             )
+            # Only include warnings when explicitly requested
+            if config.get("include_validation_warnings", False):
+                projected["_validation_warnings"] = errors
             projected["_validation_warnings"] = errors
 
         outputs.append(projected)

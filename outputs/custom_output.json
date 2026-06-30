@@ -1,0 +1,119 @@
+[
+  {
+    "candidate_id": "cand_d1b335152948a5cd",
+    "full_name": "Priya Sharma",
+    "primary_email": "priya.sharma@gmail.com",
+    "phone": "+919876543210",
+    "skills": [
+      "python",
+      "react",
+      "aws",
+      "docker",
+      "kubernetes",
+      "go",
+      "postgresql",
+      "rest",
+      "ci/cd",
+      "terraform"
+    ],
+    "current_role": "Full-stack software engineer with 6 years experience building scalable backend systems and cloud infrastructure. Passionate about distributed systems and develo",
+    "country": "IN",
+    "confidence": {
+      "full_name": 0.9,
+      "emails": 0.9,
+      "phones": 0.9,
+      "location": 0.72,
+      "links": 0.72,
+      "headline": 0.72,
+      "years_experience": 0.9,
+      "skills": 0.9,
+      "experience": 0.75,
+      "education": 0.9
+    },
+    "overall_confidence": 0.844
+  },
+  {
+    "candidate_id": "cand_ac0bbd540dfc8196",
+    "full_name": "Rahul Verma",
+    "primary_email": "rahul.verma@yahoo.com",
+    "phone": "+918765432109",
+    "skills": [
+      "python",
+      "machine learning",
+      "tensorflow",
+      "sql"
+    ],
+    "current_role": "ML engineer focused on production systems",
+    "country": "IN",
+    "confidence": {
+      "full_name": 0.6,
+      "emails": 0.6,
+      "phones": 0.6,
+      "location": 0.6,
+      "links": 0.6,
+      "headline": 0.6,
+      "years_experience": 0.6,
+      "skills": 0.6,
+      "experience": 0.6,
+      "education": 0.0
+    },
+    "overall_confidence": 0.6
+  },
+  {
+    "candidate_id": "cand_fb83c5993d100065",
+    "full_name": "Ananya Iyer",
+    "primary_email": "ananya.iyer@outlook.com",
+    "phone": "+917654321098",
+    "skills": [
+      "aws",
+      "terraform",
+      "kubernetes",
+      "ci/cd"
+    ],
+    "current_role": "Infrastructure automation specialist",
+    "country": "IN",
+    "confidence": {
+      "full_name": 0.75,
+      "emails": 0.6,
+      "phones": 0.75,
+      "location": 0.6,
+      "links": 0.6,
+      "headline": 0.6,
+      "years_experience": 0.75,
+      "skills": 0.75,
+      "experience": 0.6,
+      "education": 0.0
+    },
+    "overall_confidence": 0.673
+  },
+  {
+    "candidate_id": "cand_5c321b8e5d528f08",
+    "full_name": "Vikram Singh",
+    "primary_email": "vikram.singh@protonmail.com",
+    "phone": "+919988776655",
+    "skills": [
+      "java",
+      "spring boot",
+      "kafka",
+      "mysql",
+      "redis",
+      "docker",
+      "aws"
+    ],
+    "current_role": "Backend engineer with 3 years experience specializing in distributed systems and payment infrastructure.",
+    "country": "IN",
+    "confidence": {
+      "full_name": 0.9,
+      "emails": 0.9,
+      "phones": 0.9,
+      "location": 0.72,
+      "links": 0.72,
+      "headline": 0.72,
+      "years_experience": 0.9,
+      "skills": 0.9,
+      "experience": 0.9,
+      "education": 0.9
+    },
+    "overall_confidence": 0.862
+  }
+]

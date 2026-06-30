@@ -44,7 +44,7 @@ All commands are run from the repo root.
 **Default schema** (full canonical output, no config):
 
 ```bash
-python3 src/run.py \
+python src/run.py \
   --inputs inputs/recruiter_export.csv inputs/ats_export.json \
            inputs/resume_priya_sharma.pdf inputs/resume_vikram_singh.docx \
            inputs/recruiter_notes.txt inputs/corrupt_json.json \
@@ -55,7 +55,7 @@ python3 src/run.py \
 **Custom config** (field selection, renaming, normalization):
 
 ```bash
-python3 src/run.py \
+python src/run.py \
   --inputs inputs/recruiter_export.csv inputs/ats_export.json \
            inputs/resume_priya_sharma.pdf inputs/resume_vikram_singh.docx \
            inputs/recruiter_notes.txt inputs/corrupt_json.json \
@@ -78,8 +78,8 @@ All CLI flags:
 ## Running tests
 
 ```bash
-python3 src/tests/test_normalizers.py    # unit tests
-python3 src/tests/test_pipeline.py        # integration tests
+python src/tests/test_normalizers.py    # unit tests
+python src/tests/test_pipeline.py        # integration tests
 ```
 
 ## Core design principles

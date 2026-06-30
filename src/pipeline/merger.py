@@ -109,6 +109,31 @@ def _dedup_list(items: List[str]) -> List[str]:
     return [x for x in items if not (x in seen or seen.update({x: True}))]
 
 
+
+def _build_provenance(contributors: list[str], method: str):
+    """
+    Build provenance metadata for a merged field.
+
+    One contributor  -> {"source": "...", "method": "..."}
+    Multiple          -> {"sources": [...], "method": "..."}
+    """
+
+    contributors = list(dict.fromkeys(contributors))
+
+    if not contributors:
+        return None
+
+    if len(contributors) == 1:
+        return {
+            "source": contributors[0],
+            "method": method,
+        }
+
+    return {
+        "sources": contributors,
+        "method": method,
+    }
+
 # ── Struct merge helpers ──────────────────────────────────────────────────────
 
 def _exp_key(e: ExperienceEntry) -> str:
@@ -133,21 +158,25 @@ def _edu_key(e: EducationEntry) -> str:
     )
 
 
-def _merge_experience(all_recs: List[IntermediateRecord]) -> List[ExperienceEntry]:
+def _merge_experience(all_recs: List[IntermediateRecord]) -> Tuple[List[ExperienceEntry], List[str]]:
     """
     Union of experience entries across sources.
     Deduplication by (company_norm + title_norm + start).
     Missing sub-fields filled from lower-priority source.
     Sorted newest-first.
     """
+    contributors = []
     merged: Dict[str, ExperienceEntry] = {}
 
     for rec in sorted(all_recs, key=lambda r: _rank(r.source_name)):
+        contributed = False
         for entry in rec.experience:
             key = _exp_key(entry)
             if not key.strip("|"):
                 continue
+
             if key not in merged:
+                contributed = True
                 merged[key] = ExperienceEntry(
                     company=entry.company, title=entry.title,
                     start=entry.start, end=entry.end,
@@ -157,18 +186,33 @@ def _merge_experience(all_recs: List[IntermediateRecord]) -> List[ExperienceEntr
             else:
                 # Gap-fill from lower-priority source
                 existing = merged[key]
-                if not existing.start    and entry.start:    existing.start    = entry.start
-                if not existing.end      and entry.end:       existing.end      = entry.end
-                if not existing.summary  and entry.summary:  existing.summary  = entry.summary
-                if not existing.location and entry.location:  existing.location = entry.location
+                if not existing.start    and entry.start:    
+                    existing.start    = entry.start
+                    contributed = True
+                if not existing.end      and entry.end:       
+                    existing.end      = entry.end
+                    contributed = True
+                if not existing.summary  and entry.summary:  
+                    existing.summary  = entry.summary
+                    contributed = True
+                if not existing.location and entry.location:  
+                    existing.location = entry.location
+                    contributed = True
                 if not existing.employment_type and entry.employment_type:
                     existing.employment_type = entry.employment_type
+                    contributed = True
+            
+        if contributed:
+            contributors.append(rec.source_name)
 
     # Sort by start date descending (newest first); entries without dates go last
     def sort_key(e: ExperienceEntry) -> str:
         return e.start or "0000-00"
 
-    return sorted(merged.values(), key=sort_key, reverse=True)
+    return (
+    sorted(merged.values(), key=sort_key, reverse=True),
+    contributors,
+    )
 
 
 def _merge_education(all_recs: List[IntermediateRecord]) -> List[EducationEntry]:
@@ -242,6 +286,65 @@ def _pick_scalar(all_recs: List[IntermediateRecord],
             return val, rec.source_name
     return None, None
 
+def _pick_best_name(all_recs: List[IntermediateRecord]) -> Tuple[Optional[str], Optional[str]]:
+    """
+    Pick the most complete candidate name.
+
+    Priority:
+    1. More words
+    2. Longer name
+    3. Higher source priority
+    """
+
+    candidates = []
+
+    for rec in all_recs:
+        if rec.full_name and rec.full_name.strip():
+            candidates.append(
+            (
+                len(rec.full_name.split()),
+                len(rec.full_name),
+                -_rank(rec.source_name),
+                rec.full_name.strip(),
+                rec.source_name,
+            )
+        )
+
+    if not candidates:
+        return None, None
+
+    candidates.sort(reverse=True)
+
+    best = candidates[0]
+    return best[3], best[4]
+
+def _pick_best_headline(all_recs: List[IntermediateRecord]) -> Optional[str]:
+    """
+    Pick the most descriptive headline.
+
+    Priority:
+    1. Longest headline
+    2. Higher source priority
+    """
+
+    candidates = []
+
+    for rec in all_recs:
+        if rec.headline and rec.headline.strip():
+            candidates.append(
+                (
+                    len(rec.headline),
+                    -_rank(rec.source_name),
+                    rec.headline.strip(),
+                )
+            )
+
+    if not candidates:
+        return None
+
+    candidates.sort(reverse=True)
+
+    return candidates[0][2]
 
 # ── Provenance merge ──────────────────────────────────────────────────────────
 
@@ -316,22 +419,23 @@ def _merge_candidate_records(
 
     # ── Candidate ID ──────────────────────────────────────────────────────────
     primary_email = canon.emails[0] if canon.emails else None
-    name_scalar, _ = _pick_scalar(all_recs, "full_name")
+    best_name, _ = _pick_best_name(all_recs)
     phone_scalar   = canon.phones[0] if canon.phones else None
     canon.candidate_id = make_candidate_id(
-        primary_email, name_scalar, phone_scalar, bucket_key=bucket_key
+        primary_email, best_name, phone_scalar, bucket_key=bucket_key
     )
 
     # ── Scalar fields ─────────────────────────────────────────────────────────
-    canon.full_name,        _ = _pick_scalar(all_recs, "full_name")
-    canon.headline,         _ = _pick_scalar(all_recs, "headline")
+    canon.full_name, full_name_source = _pick_best_name(all_recs)
+    canon.headline = _pick_best_headline(all_recs)
     canon.years_experience, _ = _pick_scalar(all_recs, "years_experience")
 
     # ── Struct fields ─────────────────────────────────────────────────────────
-    canon.location   = _merge_location(all_recs)
-    canon.links      = _merge_links(all_recs)
-    canon.experience = _merge_experience(all_recs)
-    canon.education  = _merge_education(all_recs)
+    canon.location = _merge_location(all_recs)
+    canon.links = _merge_links(all_recs)
+
+    canon.experience, exp_sources = _merge_experience(all_recs)
+    canon.education = _merge_education(all_recs)
 
     # Derive years_experience if not found directly
     if canon.years_experience is None:
@@ -339,14 +443,46 @@ def _merge_candidate_records(
 
     # ── Skills (union, deduped, canonical names only) ─────────────────────────
     skill_union: List[str] = []
+    skill_contributors: List[str] = []
+
     for rec in sorted(all_recs, key=lambda r: _rank(r.source_name)):
+        contributed = False
+
         for s in rec.skills:
-            if s and s not in skill_union:
+            if (
+                s
+                and s.lower() not in {"garbage", "unknown", "n/a", "-"}
+                and s not in skill_union
+            ):
                 skill_union.append(s)
+                contributed = True
+
+        if contributed:
+            skill_contributors.append(rec.source_name)
+
     canon.skills = skill_union
 
     # ── Provenance ────────────────────────────────────────────────────────────
+    # Start with the default provenance (highest-priority source per field)
     canon.provenance = _merge_provenance(all_recs)
+
+    # Override fields that use custom merge logic
+
+    if full_name_source:
+        canon.provenance["full_name"] = {
+            "source": full_name_source,
+            "method": "most_complete_name",
+        }
+
+    canon.provenance["experience"] = _build_provenance(
+        exp_sources,
+        "merged" if len(exp_sources) > 1 else "direct_field",
+    )
+
+    canon.provenance["skills"] = _build_provenance(
+        skill_contributors,
+        "merged" if len(skill_contributors) > 1 else "direct_field",
+    )
 
     # ── Metadata ──────────────────────────────────────────────────────────────
     canon.metadata = {

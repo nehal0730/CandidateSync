@@ -1,0 +1,449 @@
+[
+  {
+    "candidate_id": "cand_d1b335152948a5cd",
+    "full_name": "Priya Sharma",
+    "emails": [
+      "priya.sharma@gmail.com"
+    ],
+    "phones": [
+      "+919876543210"
+    ],
+    "location": {
+      "city": "Bangalore",
+      "region": "Karnataka",
+      "country": "IN"
+    },
+    "links": {
+      "linkedin": "https://linkedin.com/in/priyasharma",
+      "github": "https://github.com/priyasharma-dev",
+      "portfolio": null,
+      "other": []
+    },
+    "headline": "Full-stack software engineer with 6 years experience building scalable backend systems and cloud infrastructure. Passionate about distributed systems and develo",
+    "years_experience": 6.0,
+    "skills": [
+      "python",
+      "react",
+      "aws",
+      "docker",
+      "kubernetes",
+      "go",
+      "postgresql",
+      "rest",
+      "ci/cd",
+      "terraform"
+    ],
+    "experience": [
+      {
+        "company": "TechCorp India",
+        "title": "Senior Software Engineer",
+        "start": "2021-03",
+        "end": "2026-06",
+        "summary": "Leading the backend platform team. Designed and built microservices in Python and Go serving 2M+ daily requests. Reduced infra costs by 30% through Kubernetes migration.",
+        "location": null,
+        "employment_type": null
+      },
+      {
+        "company": "StartupXYZ",
+        "title": "Software Engineer",
+        "start": "2019-06",
+        "end": "2021-02",
+        "summary": "Built REST APIs and CI/CD pipelines for the core product. Worked closely with product and design teams.",
+        "location": null,
+        "employment_type": null
+      }
+    ],
+    "education": [
+      {
+        "institution": "Indian Institute of Technology, Delhi",
+        "degree": "B.Tech",
+        "field": "Computer Science",
+        "end_year": 2019
+      }
+    ],
+    "confidence": {
+      "full_name": 0.9,
+      "emails": 0.9,
+      "phones": 0.9,
+      "location": 0.72,
+      "links": 0.72,
+      "headline": 0.72,
+      "years_experience": 0.9,
+      "skills": 0.9,
+      "experience": 0.75,
+      "education": 0.9
+    },
+    "provenance": {
+      "full_name": {
+        "source": "recruiter_csv",
+        "method": "most_complete_name"
+      },
+      "location": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "emails": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "phones": {
+        "source": "ats_json",
+        "method": "regex_parse"
+      },
+      "links": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "headline": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "years_experience": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "education": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "skills": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "experience": {
+        "sources": [
+          "recruiter_csv",
+          "resume_pdf"
+        ],
+        "method": "merged"
+      }
+    },
+    "overall_confidence": 0.844,
+    "metadata": {
+      "processed_at": "2026-06-30",
+      "merged_from": [
+        "ats_json",
+        "recruiter_csv",
+        "recruiter_notes",
+        "resume_pdf"
+      ],
+      "version": "1.0.0"
+    }
+  },
+  {
+    "candidate_id": "cand_ac0bbd540dfc8196",
+    "full_name": "Rahul Verma",
+    "emails": [
+      "rahul.verma@yahoo.com"
+    ],
+    "phones": [
+      "+918765432109"
+    ],
+    "location": {
+      "city": "Pune",
+      "region": null,
+      "country": "IN"
+    },
+    "links": {
+      "linkedin": "https://linkedin.com/in/rahulverma",
+      "github": null,
+      "portfolio": null,
+      "other": []
+    },
+    "headline": "ML engineer focused on production systems",
+    "years_experience": 4.0,
+    "skills": [
+      "python",
+      "machine learning",
+      "tensorflow",
+      "sql"
+    ],
+    "experience": [
+      {
+        "company": "DataSystems Inc",
+        "title": "Data Scientist",
+        "start": null,
+        "end": null,
+        "summary": null,
+        "location": null,
+        "employment_type": null
+      }
+    ],
+    "education": [],
+    "confidence": {
+      "full_name": 0.6,
+      "emails": 0.6,
+      "phones": 0.6,
+      "location": 0.6,
+      "links": 0.6,
+      "headline": 0.6,
+      "years_experience": 0.6,
+      "skills": 0.6,
+      "experience": 0.6,
+      "education": 0.0
+    },
+    "provenance": {
+      "full_name": {
+        "source": "recruiter_csv",
+        "method": "most_complete_name"
+      },
+      "emails": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "location": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "phones": {
+        "source": "recruiter_csv",
+        "method": "regex_parse"
+      },
+      "links": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "headline": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "years_experience": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "experience": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "skills": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      }
+    },
+    "overall_confidence": 0.6,
+    "metadata": {
+      "processed_at": "2026-06-30",
+      "merged_from": [
+        "recruiter_csv"
+      ],
+      "version": "1.0.0"
+    }
+  },
+  {
+    "candidate_id": "cand_fb83c5993d100065",
+    "full_name": "Ananya Iyer",
+    "emails": [
+      "ananya.iyer@outlook.com"
+    ],
+    "phones": [
+      "+917654321098"
+    ],
+    "location": {
+      "city": "Hyderabad",
+      "region": null,
+      "country": "IN"
+    },
+    "links": {
+      "linkedin": "https://linkedin.com/in/ananyaiyer",
+      "github": null,
+      "portfolio": null,
+      "other": []
+    },
+    "headline": "Infrastructure automation specialist",
+    "years_experience": 5.0,
+    "skills": [
+      "aws",
+      "terraform",
+      "kubernetes",
+      "ci/cd"
+    ],
+    "experience": [
+      {
+        "company": "CloudNine Technologies",
+        "title": "DevOps Engineer",
+        "start": null,
+        "end": null,
+        "summary": null,
+        "location": null,
+        "employment_type": null
+      }
+    ],
+    "education": [],
+    "confidence": {
+      "full_name": 0.75,
+      "emails": 0.6,
+      "phones": 0.75,
+      "location": 0.6,
+      "links": 0.6,
+      "headline": 0.6,
+      "years_experience": 0.75,
+      "skills": 0.75,
+      "experience": 0.6,
+      "education": 0.0
+    },
+    "provenance": {
+      "full_name": {
+        "source": "recruiter_csv",
+        "method": "most_complete_name"
+      },
+      "emails": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "location": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "phones": {
+        "source": "recruiter_csv",
+        "method": "regex_parse"
+      },
+      "links": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "headline": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "years_experience": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "experience": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      "skills": {
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      }
+    },
+    "overall_confidence": 0.673,
+    "metadata": {
+      "processed_at": "2026-06-30",
+      "merged_from": [
+        "recruiter_csv",
+        "recruiter_notes"
+      ],
+      "version": "1.0.0"
+    }
+  },
+  {
+    "candidate_id": "cand_5c321b8e5d528f08",
+    "full_name": "Vikram Singh",
+    "emails": [
+      "vikram.singh@protonmail.com"
+    ],
+    "phones": [
+      "+919988776655"
+    ],
+    "location": {
+      "city": "Delhi",
+      "region": null,
+      "country": "IN"
+    },
+    "links": {
+      "linkedin": "https://linkedin.com/in/vikramsingh",
+      "github": null,
+      "portfolio": null,
+      "other": []
+    },
+    "headline": "Backend engineer with 3 years experience specializing in distributed systems and payment infrastructure.",
+    "years_experience": 3.0,
+    "skills": [
+      "java",
+      "spring boot",
+      "kafka",
+      "mysql",
+      "redis",
+      "docker",
+      "aws"
+    ],
+    "experience": [
+      {
+        "company": "FinTech Solutions",
+        "title": "Backend Engineer",
+        "start": "2022-01",
+        "end": "2026-06",
+        "summary": "Building payment processing systems with Java and Spring Boot.",
+        "location": null,
+        "employment_type": null
+      }
+    ],
+    "education": [
+      {
+        "institution": "NIT Trichy",
+        "degree": "B.Tech",
+        "field": "Electronics",
+        "end_year": 2021
+      }
+    ],
+    "confidence": {
+      "full_name": 0.9,
+      "emails": 0.9,
+      "phones": 0.9,
+      "location": 0.72,
+      "links": 0.72,
+      "headline": 0.72,
+      "years_experience": 0.9,
+      "skills": 0.9,
+      "experience": 0.9,
+      "education": 0.9
+    },
+    "provenance": {
+      "full_name": {
+        "source": "ats_json",
+        "method": "most_complete_name"
+      },
+      "location": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "emails": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "phones": {
+        "source": "ats_json",
+        "method": "regex_parse"
+      },
+      "links": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "headline": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "years_experience": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "experience": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "education": {
+        "source": "ats_json",
+        "method": "direct_field"
+      },
+      "skills": {
+        "sources": [
+          "ats_json",
+          "resume_pdf"
+        ],
+        "method": "merged"
+      }
+    },
+    "overall_confidence": 0.862,
+    "metadata": {
+      "processed_at": "2026-06-30",
+      "merged_from": [
+        "ats_json",
+        "resume_pdf"
+      ],
+      "version": "1.0.0"
+    }
+  }
+]
