@@ -7,8 +7,8 @@
     { "path": "current_role",  "from": "headline",       "type": "string" },
     { "path": "country",       "from": "location.country","type": "string" }
   ],
-  "include_confidence": true,
+  "include_confidence": false,
   "include_provenance": false,
-  "include_metadata": false,
+  "include_metadata": true,
   "on_missing": "null"
 }
