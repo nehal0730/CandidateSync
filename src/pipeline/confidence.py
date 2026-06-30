@@ -108,6 +108,28 @@ def _values_agree(all_recs: List[IntermediateRecord], field: str) -> bool:
 
     return False
 
+def _confidence_reason(
+    field: str,
+    contributing_sources: List[str],
+    agreed: bool,
+) -> str:
+    if not contributing_sources:
+        return "No source provided this field."
+
+    if len(contributing_sources) == 1:
+        return f"Only {contributing_sources[0]} provided this field."
+
+    pretty_sources = ", ".join(contributing_sources)
+
+    if agreed:
+        return (
+            f"Multiple sources ({pretty_sources}) agreed on this value."
+        )
+
+    return (
+        f"Multiple sources provided different values. "
+        f"The value from ATS was selected because it has the highest reliability."
+    )
 
 def compute_confidence(
     canon: CanonicalRecord,
@@ -127,13 +149,16 @@ def compute_confidence(
       full_name in no source:
         conf = 0.0
     """
-    scored: Dict[str, float] = {}
+    scored: Dict[str, Dict[str, Any]] = {}
 
     for field in _FIELD_IMPORTANCE:
         contributing_sources = _sources_with_value(all_recs, field)
 
         if not contributing_sources:
-            scored[field] = 0.0
+            scored[field] = {
+                "score": 0.0,
+                "reason": "No source provided this field."
+            }
             continue
 
         # Highest source weight among contributing sources
@@ -142,14 +167,28 @@ def compute_confidence(
         )
 
         # Agreement bonus
-        if len(contributing_sources) >= 2 and _values_agree(all_recs, field):
+        agreed = (
+            len(contributing_sources) >= 2
+            and _values_agree(all_recs, field)
+        )
+
+        if agreed:
             agreement_bonus = 1.0
         elif contributing_sources:
             agreement_bonus = 0.8
         else:
             agreement_bonus = 0.0
 
-        scored[field] = round(top_weight * agreement_bonus, 3)
+        score = round(top_weight * agreement_bonus, 3)
+
+        scored[field] = {
+            "score": score,
+            "reason": _confidence_reason(
+                field,
+                contributing_sources,
+                agreed,
+            ),
+        }
 
     canon.confidence = scored
 
@@ -157,10 +196,14 @@ def compute_confidence(
     total_weight = 0.0
     weighted_sum = 0.0
     for field, importance in _FIELD_IMPORTANCE.items():
-        score = scored.get(field, 0.0)
-        if score > 0:
-            weighted_sum  += score * importance
-            total_weight  += importance
+        score_obj = scored.get(field)
+
+        if score_obj:
+            score = score_obj["score"]
+
+            if score > 0:
+                weighted_sum += score * importance
+                total_weight += importance
 
     canon.overall_confidence = round(
         weighted_sum / total_weight if total_weight > 0 else 0.0, 3

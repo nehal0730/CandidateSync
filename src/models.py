@@ -164,7 +164,7 @@ class CanonicalRecord:
     education:  List[EducationEntry]  = field(default_factory=list)
 
     # Separate confidence and provenance objects (field-wise dicts)
-    confidence:       Dict[str, float]          = field(default_factory=dict)
+    confidence:       Dict[str, Dict[str, Any]] = field(default_factory=dict)
     provenance:       Dict[str, Dict[str, Any]] = field(default_factory=dict)
     overall_confidence: float                   = 0.0
 

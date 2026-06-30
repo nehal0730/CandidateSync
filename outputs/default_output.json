@@ -62,16 +62,46 @@
       }
     ],
     "confidence": {
-      "full_name": 0.9,
-      "emails": 0.9,
-      "phones": 0.9,
-      "location": 0.72,
-      "links": 0.72,
-      "headline": 0.72,
-      "years_experience": 0.9,
-      "skills": 0.9,
-      "experience": 0.75,
-      "education": 0.9
+      "full_name": {
+        "score": 0.9,
+        "reason": "Multiple sources (recruiter_csv, ats_json, resume_pdf, recruiter_notes) agreed on this value."
+      },
+      "emails": {
+        "score": 0.9,
+        "reason": "Multiple sources (recruiter_csv, ats_json, resume_pdf, recruiter_notes) agreed on this value."
+      },
+      "phones": {
+        "score": 0.9,
+        "reason": "Multiple sources (recruiter_csv, ats_json, resume_pdf, recruiter_notes) agreed on this value."
+      },
+      "location": {
+        "score": 0.72,
+        "reason": "Multiple sources provided different values. The value from ATS was selected because it has the highest reliability."
+      },
+      "links": {
+        "score": 0.72,
+        "reason": "Multiple sources provided different values. The value from ATS was selected because it has the highest reliability."
+      },
+      "headline": {
+        "score": 0.72,
+        "reason": "Multiple sources provided different values. The value from ATS was selected because it has the highest reliability."
+      },
+      "years_experience": {
+        "score": 0.9,
+        "reason": "Multiple sources (recruiter_csv, ats_json, resume_pdf, recruiter_notes) agreed on this value."
+      },
+      "skills": {
+        "score": 0.9,
+        "reason": "Multiple sources (recruiter_csv, ats_json, resume_pdf, recruiter_notes) agreed on this value."
+      },
+      "experience": {
+        "score": 0.75,
+        "reason": "Multiple sources (recruiter_csv, resume_pdf) agreed on this value."
+      },
+      "education": {
+        "score": 0.9,
+        "reason": "Multiple sources (ats_json, resume_pdf) agreed on this value."
+      }
     },
     "provenance": {
       "full_name": {
@@ -125,10 +155,10 @@
     "metadata": {
       "processed_at": "2026-06-30",
       "merged_from": [
-        "recruiter_notes",
         "ats_json",
         "recruiter_csv",
-        "resume_pdf"
+        "resume_pdf",
+        "recruiter_notes"
       ],
       "version": "1.0.0",
       "quality": {
@@ -180,16 +210,46 @@
     ],
     "education": [],
     "confidence": {
-      "full_name": 0.6,
-      "emails": 0.6,
-      "phones": 0.6,
-      "location": 0.6,
-      "links": 0.6,
-      "headline": 0.6,
-      "years_experience": 0.6,
-      "skills": 0.6,
-      "experience": 0.6,
-      "education": 0.0
+      "full_name": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "emails": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "phones": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "location": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "links": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "headline": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "years_experience": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "skills": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "experience": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "education": {
+        "score": 0.0,
+        "reason": "No source provided this field."
+      }
     },
     "provenance": {
       "full_name": {
@@ -285,16 +345,46 @@
     ],
     "education": [],
     "confidence": {
-      "full_name": 0.75,
-      "emails": 0.6,
-      "phones": 0.75,
-      "location": 0.6,
-      "links": 0.6,
-      "headline": 0.6,
-      "years_experience": 0.75,
-      "skills": 0.75,
-      "experience": 0.6,
-      "education": 0.0
+      "full_name": {
+        "score": 0.75,
+        "reason": "Multiple sources (recruiter_csv, recruiter_notes) agreed on this value."
+      },
+      "emails": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "phones": {
+        "score": 0.75,
+        "reason": "Multiple sources (recruiter_csv, recruiter_notes) agreed on this value."
+      },
+      "location": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "links": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "headline": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "years_experience": {
+        "score": 0.75,
+        "reason": "Multiple sources (recruiter_csv, recruiter_notes) agreed on this value."
+      },
+      "skills": {
+        "score": 0.75,
+        "reason": "Multiple sources (recruiter_csv, recruiter_notes) agreed on this value."
+      },
+      "experience": {
+        "score": 0.6,
+        "reason": "Only recruiter_csv provided this field."
+      },
+      "education": {
+        "score": 0.0,
+        "reason": "No source provided this field."
+      }
     },
     "provenance": {
       "full_name": {
@@ -338,8 +428,8 @@
     "metadata": {
       "processed_at": "2026-06-30",
       "merged_from": [
-        "recruiter_notes",
-        "recruiter_csv"
+        "recruiter_csv",
+        "recruiter_notes"
       ],
       "version": "1.0.0",
       "quality": {
@@ -401,16 +491,46 @@
       }
     ],
     "confidence": {
-      "full_name": 0.9,
-      "emails": 0.9,
-      "phones": 0.9,
-      "location": 0.72,
-      "links": 0.72,
-      "headline": 0.72,
-      "years_experience": 0.9,
-      "skills": 0.9,
-      "experience": 0.9,
-      "education": 0.9
+      "full_name": {
+        "score": 0.9,
+        "reason": "Multiple sources (ats_json, resume_pdf) agreed on this value."
+      },
+      "emails": {
+        "score": 0.9,
+        "reason": "Multiple sources (ats_json, resume_pdf) agreed on this value."
+      },
+      "phones": {
+        "score": 0.9,
+        "reason": "Multiple sources (ats_json, resume_pdf) agreed on this value."
+      },
+      "location": {
+        "score": 0.72,
+        "reason": "Only ats_json provided this field."
+      },
+      "links": {
+        "score": 0.72,
+        "reason": "Multiple sources provided different values. The value from ATS was selected because it has the highest reliability."
+      },
+      "headline": {
+        "score": 0.72,
+        "reason": "Multiple sources provided different values. The value from ATS was selected because it has the highest reliability."
+      },
+      "years_experience": {
+        "score": 0.9,
+        "reason": "Multiple sources (ats_json, resume_pdf) agreed on this value."
+      },
+      "skills": {
+        "score": 0.9,
+        "reason": "Multiple sources (ats_json, resume_pdf) agreed on this value."
+      },
+      "experience": {
+        "score": 0.9,
+        "reason": "Multiple sources (ats_json, resume_pdf) agreed on this value."
+      },
+      "education": {
+        "score": 0.9,
+        "reason": "Multiple sources (ats_json, resume_pdf) agreed on this value."
+      }
     },
     "provenance": {
       "full_name": {

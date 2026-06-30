@@ -167,6 +167,24 @@ class TestMergeConflictResolution(unittest.TestCase):
 
 class TestConfidenceScoring(unittest.TestCase):
 
+    def test_confidence_reason_generated(self):
+        r1 = make_rec(
+            "resume_pdf",
+            0.70,
+            emails=["x@y.com"],
+            skills=["python"],
+        )
+
+        pairs = merge_records([r1])
+        canon, contributing = pairs[0]
+
+        compute_confidence(canon, contributing)
+
+        self.assertEqual(
+            canon.confidence["skills"]["reason"],
+            "Only resume_pdf provided this field."
+        )
+
     def test_agreement_gives_higher_confidence_than_single_source(self):
         r1 = make_rec("ats_json", 0.90, emails=["x@y.com"], full_name="Priya")
         r2 = make_rec("recruiter_csv", 0.75, emails=["x@y.com"], full_name="Priya")
@@ -178,7 +196,7 @@ class TestConfidenceScoring(unittest.TestCase):
         pairs2 = merge_records([r3])
         canon2, contributing2 = pairs2[0]
         compute_confidence(canon2, contributing2)
-        self.assertGreater(canon.confidence["full_name"], canon2.confidence["full_name"])
+        self.assertGreater(canon.confidence["full_name"]["score"], canon2.confidence["full_name"]["score"])
 
     def test_no_source_gives_zero_confidence(self):
         r1 = make_rec("ats_json", 0.90, emails=["x@y.com"])  # no headline at all
@@ -208,7 +226,7 @@ class TestConfidenceScoring(unittest.TestCase):
 
         self.assertEqual(len(contrib_a), 2)
         self.assertEqual(len(contrib_b), 1)
-        self.assertGreater(canon_a.confidence["full_name"], canon_b.confidence["full_name"])
+        self.assertGreater(canon_a.confidence["full_name"]["score"], canon_b.confidence["full_name"]["score"])
 
 
 class TestProjection(unittest.TestCase):
