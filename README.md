@@ -2,7 +2,7 @@
 
 Merges candidate data from a Recruiter CSV, ATS JSON export, resumes (PDF/DOCX), and recruiter notes (TXT) into one clean, confidence-scored candidate profile — with a runtime-configurable output schema.
 
-Design doc: `NehalJain_nehaljain0730@gmail.com_Eightfold.pdf`
+Design document: `Design Doc.pdf`
 
 ## Project structure
 
@@ -17,7 +17,7 @@ candidatesync/
 │   ├── recruiter_notes.txt
 │   ├── resume_priya_sharma.pdf
 │   └── resume_vikram_singh.docx
-├── output/                     # generated output JSON lands here
+├── outputs/                     # generated output JSON lands here
 ├── src/
 │   ├── extractors/             # one module per source type
 │   ├── normalizers/            # phone/date/country/email/skill normalizers
@@ -45,10 +45,8 @@ All commands are run from the repo root.
 
 ```bash
 python src/run.py \
-  --inputs inputs/recruiter_export.csv inputs/ats_export.json \
-           inputs/resume_priya_sharma.pdf inputs/resume_vikram_singh.docx \
-           inputs/recruiter_notes.txt inputs/corrupt_json.json \
-  --output output/default_output.json \
+  --inputs inputs/*.csv inputs/*.json inputs/*.pdf inputs/*.docx inputs/*.txt \
+  --output outputs/default_output.json \
   --pretty
 ```
 
@@ -56,11 +54,9 @@ python src/run.py \
 
 ```bash
 python src/run.py \
-  --inputs inputs/recruiter_export.csv inputs/ats_export.json \
-           inputs/resume_priya_sharma.pdf inputs/resume_vikram_singh.docx \
-           inputs/recruiter_notes.txt inputs/corrupt_json.json \
+  --inputs inputs/*.csv inputs/*.json inputs/*.pdf inputs/*.docx inputs/*.txt \
   --config config/minimal_profile.json \
-  --output output/custom_output.json \
+  --output outputs/custom_output.json \
   --pretty
 ```
 
@@ -78,15 +74,15 @@ All CLI flags:
 ## Running tests
 
 ```bash
-python src/tests/test_normalizers.py    # unit tests
-python src/tests/test_pipeline.py        # integration tests
+python tests/test_normalizers.py    # unit tests
+python tests/test_pipeline.py        # integration tests
 ```
 
 ## Core design principles
 
 - **Deterministic** — no LLMs. Extraction uses `pdfplumber`, `python-docx`, `csv`/`json`, and regex/rule-based parsing. Same inputs always produce the same output.
 - **Never guess** — if a value can't be determined confidently, the output is `null`. Wrong-but-confident data is worse than honestly-empty data.
-- **Explainable** — every field carries a `provenance` (source + method) and a `confidence` score.
+- **Explainable** — the canonical profile tracks `provenance` (source + method) and a `confidence` score, and the projection layer can include or omit them depending on the runtime configuration.
 - **Robust** — a missing, empty, or malformed source file is logged and skipped; it never crashes the run.
 
 ## Candidate matching & merge policy (summary)
@@ -96,7 +92,7 @@ Identity matching uses strict precedence — each tier is only checked if the on
 2. Normalized phone (only if no email)
 3. Normalized name + company (only if the record has neither email nor phone at all)
 
-Source priority: ATS JSON (0.90) > Recruiter CSV (0.75) > Resume (0.70) > Recruiter Notes (0.50). Scalars take the highest-priority value; arrays union with dedup; structured lists (experience, education) merge by natural key with gap-filling from lower-priority sources.
+Source priority: ATS JSON (0.90) > Recruiter CSV (0.75) > Resume (0.70) > Recruiter Notes (0.50). Names choose the most complete valid value. Other scalar fields use source priority. Arrays are merged with deduplication, while structured lists (experience, education) merge by natural key with gap-filling from lower-priority sources.
 
 ## Known limitations
 
